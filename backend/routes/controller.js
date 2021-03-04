@@ -16,4 +16,10 @@ router.post('/register', async function(req, res, next) {
     res.json(result); 
 });
 
+router.get('/devices', async function(req, res, next) {
+    const result = await connector.getControllerDevices(req.body.controllerId);
+    res.json(result); 
+});
+
+
 module.exports = router;

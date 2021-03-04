@@ -60,7 +60,54 @@ async function disconnectGateway() {
 }
 
 
+async function getAllDevices() {
+    const contract = await init();
+    let result;
+    try {
+        result = await contract.submitTransaction('getAllDevices');
+        await disconnectGateway();    
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    console.log('result from chaincode = ' + result.toString());
+    return JSON.parse(result.toString());
+}
+
+async function getDevice(id) {
+    const contract = await init();
+    let result;
+    try {
+        result = await contract.submitTransaction('getDevice', id);
+        await disconnectGateway();    
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    console.log('result from chaincode = ' + result.toString());
+    return JSON.parse(result.toString());
+}
+
+
+async function getControllerDevices(id) {
+    const contract = await init();
+    let result;
+    try {
+        result = await contract.submitTransaction('getControllerDevices', id);
+        await disconnectGateway();    
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    console.log('result from chaincode = ' + result.toString());
+    return JSON.parse(result.toString());
+}
+
+
 module.exports = {
     getAllControllers: getAllControllers,
-    registerController: registerController
+    registerController: registerController,
+    getAllDevices: getAllDevices,
+    getDevice: getDevice,
+    getControllerDevices: getControllerDevices
 }

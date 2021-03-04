@@ -1,6 +1,6 @@
 {
   "name": "EVChargerReg",
-  "version": "0.0.12",
+  "version": "0.0.0",
   "description": "My Smart Contract",
   "main": "index.js",
   "engines": {
