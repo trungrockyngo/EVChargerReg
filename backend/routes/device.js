@@ -26,7 +26,7 @@ router.post('/updateStatus', async function(req, res, next) {
     res.json(result); 
 });
 
-router.get('/getDeviceController', async function(req, res, next) {
+router.get('/controller', async function(req, res, next) {
     const result = await connector.getDeviceController(req.body.deviceID);
     res.json(result); 
 });
