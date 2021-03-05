@@ -1,0 +1,44 @@
+[
+    {
+        "transactionName": "controllerDeviceExists",
+        "transactionLabel": "A test controllerDeviceExists transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "createControllerDevice",
+        "transactionLabel": "A test createControllerDevice transaction",
+        "arguments": [
+            "001",
+            "some value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "readControllerDevice",
+        "transactionLabel": "A test readControllerDevice transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "updateControllerDevice",
+        "transactionLabel": "A test updateControllerDevice transaction",
+        "arguments": [
+            "001",
+            "some other value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "deleteControllerDevice",
+        "transactionLabel": "A test deleteControllerDevice transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    }
+]
