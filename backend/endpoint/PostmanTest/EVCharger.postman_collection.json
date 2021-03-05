@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "2068d3a0-2419-4cd1-8723-8adc75565914",
+		"name": "EVCharger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\": \"TestDevice\",\n    \"model\": \"PSDG\",\n    \"mac\": \"89:334:00:89\",\n    \"powerType\": \"AC\",\n    \"location\": {\n        \"long\": \"56\",\n        \"lat\": \"45\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllDevices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8000/device/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDeviceController",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"deviceID\": \"DEV-1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/controller",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"controller"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "executeCommand",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"deviceID\": \"DEV-2\",\n   \"command\": \"show inUSe status\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/executeCommand",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"executeCommand"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDetailsofDevice",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceId\": \"DEV-1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/id",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllController",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/controller/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AssignController",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceID\": \"DEV-1\",\n    \"controllerID\" : \"CONTR-2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/controller/assign",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"assign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetControllerDevices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"CONTR-2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/controller/devices",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateController",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"controllerID\" :  \"CONTR-2\",\n    \"serviceProvider\" : \"SP98\",\n    \"location\": {\n        \"long\": \"89\",\n        \"lat\": \"45\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/controller/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeController",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceID\": \"DEV-2\",\n    \"newControllerID\" : \"CONTR-1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/controller/change",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"change"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterController",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"controllerName\": \"Controller3\", \n    \"serviceProvider\" : \"SP5\", \n    \"location\" : {\n        \"long\": \"10\", \n        \"lat\" : \"50\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/controller/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"controller",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTemperature",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceId\" : \"DEV-2\", \n    \"currentTemp\": \"56\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateDeviceStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceId\" : \"DEV-1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/device/updateStatus",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"device",
+						"updateStatus"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -17,14 +17,22 @@ router.post('/register', async function(req, res, next) {
 
 router.post('/update', async (req, res, next) => {
     const result = await connector.updateController(req.body.controllerID, req.body.serviceProvider, req.body.location.long, req.body.location.lat);
+    res.json(result); 
 });
 
 router.post('/change', async (req, res, next) => {
     const result = await connector.changeController(req.body.deviceID, req.body.newControllerID);
+    res.json(result); 
 });
 
 router.post('/assign', async (req, res, next) => {
-    const result = await connector.ass(req.body.controllerID, req.body.serviceProvider, req.body.location.long, req.body.location.lat);
+    const result = await connector.assignController(req.body.deviceID, req.body.controllerID);
+    res.json(result); 
+});
+
+router.get('/devices', async (req, res, next) => {
+    const result = await connector.getControllerDevices(req.body.id);
+    res.json(result); 
 });
 
 

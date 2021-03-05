@@ -10,7 +10,7 @@ router.get('/all', async function(req, res, next) {
     res.json(result); 
 });
 
-router.get('/device', async function(req, res, next) {
+router.get('/id', async function(req, res, next) {
     //let queryObj = req.query;
     const result = await connector.getDevice(req.body.deviceId);
     res.json(result); 
@@ -40,5 +40,7 @@ router.post('/executeCommand', async function(req, res, next) {
     const result = await connector.executeDeviceCommand(req.body.deviceID, req.body.command);
     res.json(result); 
 });
+
+
 
 module.exports = router;
