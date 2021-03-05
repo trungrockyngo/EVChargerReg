@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var connector = require('../chaincode-connector/EVChargerConnector')
+const connector = require('../endpoint/mapping')
 
 /* GET query listing. */
 router.get('/all', async function(req, res, next) {
