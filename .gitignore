@@ -7,8 +7,8 @@
 # installed platform-specific binaries
 backend/node_modules
 backend/config
-backend/gateway
-backend/wallet
+backend/gateway/
+backend/wallet/
 .DS_Store
 .project
 
