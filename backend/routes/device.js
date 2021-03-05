@@ -16,5 +16,14 @@ router.get('/device', async function(req, res, next) {
     res.json(result); 
 });
 
+router.post('/update', async function(req, res, next) {
+    const result = await connector.updateDevice(req.body.deviceId, req.body.currentTemp);
+    res.json(result); 
+});
+
+router.post('/updateStatus', async function(req, res, next) {
+    const result = await connector.updateDeviceStatus(req.body.deviceId);
+    res.json(result); 
+});
 
 module.exports = router;

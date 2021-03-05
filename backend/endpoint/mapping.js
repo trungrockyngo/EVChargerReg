@@ -139,6 +139,29 @@ async function getControllerDevices(id) {
     return JSON.parse(result.toString());
 }
 
+async function updateDevice(deviceId, currentTemp) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('updateDevice', deviceId, currentTemp);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+async function updateDeviceStatus(deviceId) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('updateDeviceStatus', deviceId);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
 
 module.exports = {
     /* controller */
@@ -149,6 +172,8 @@ module.exports = {
     assignController: assignController,
     getControllerDevices: getControllerDevices,
     getDevice: getDevice,
-    getAllDevices: getAllDevices
+    getAllDevices: getAllDevices,
     /* devices */
+    updateDevice: updateDevice,
+    updateDeviceStatus: updateDeviceStatus
 }
