@@ -163,6 +163,48 @@ async function updateDeviceStatus(deviceId) {
     return JSON.parse('{"result": "success"}');
 }
 
+async function registerDevice(brand, model, mac, powerType, long, lat) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('registerDevice', brand, model, mac, powerType, long, lat);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+async function getDeviceController(devID) {
+
+    const contract = await init();
+    let result;
+    try {
+        result = await contract.submitTransaction('getDeviceController', devID
+        );   
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway(); 
+    console.log('result from chaincode = ' + result.toString());
+    return result.toString();
+
+}
+
+async function executeDeviceCommand(devID, command) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('executeDeviceCommand', devID, command);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+
 module.exports = {
     /* controller */
     getAllControllers: getAllControllers,
@@ -175,5 +217,8 @@ module.exports = {
     getAllDevices: getAllDevices,
     /* devices */
     updateDevice: updateDevice,
-    updateDeviceStatus: updateDeviceStatus
+    updateDeviceStatus: updateDeviceStatus,
+    registerDevice: registerDevice,
+    getDeviceController: getDeviceController,
+    executeDeviceCommand: executeDeviceCommand
 }

@@ -26,4 +26,19 @@ router.post('/updateStatus', async function(req, res, next) {
     res.json(result); 
 });
 
+router.get('/getDeviceController', async function(req, res, next) {
+    const result = await connector.getDeviceController(req.body.deviceID);
+    res.json(result); 
+});
+
+router.post('/register', async function(req, res, next) {
+    const result = await connector.registerDevice(req.body.brand, req.body.model, req.body.mac, req.body.powerType, req.body.location.long, req.body.location.lat);
+    res.json(result); 
+});
+
+router.post('/executeCommand', async function(req, res, next) {
+    const result = await connector.executeDeviceCommand(req.body.deviceID, req.body.command);
+    res.json(result); 
+});
+
 module.exports = router;
