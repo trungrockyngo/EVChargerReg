@@ -43,10 +43,46 @@ async function getAllControllers() {
     return JSON.parse(result.toString());
 }
 
-async function registerController(cn, sp, long, lat) {
+async function registerController(controllerName, serProvider, long, lat) {
     const contract = await init();
     try {
-        await contract.submitTransaction('registerController', cn, sp, long, lat);
+        await contract.submitTransaction('registerController', controllerName, serProvider, long, lat);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+async function updateController(controllerID, serProvider, long, lat) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('updateController', controllerID, serProvider, long, lat);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+async function changeController(deviceID, newControllerID) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('changeController', deviceID, newControllerID);
+    } catch (error) {
+        console.error('Failed to submit transaction:', error);
+        process.exit(1);
+    }
+    await disconnectGateway();    
+    return JSON.parse('{"result": "success"}');
+}
+
+async function assignController(deviceID, controllerID) {
+    const contract = await init();
+    try {
+        await contract.submitTransaction('assignController', deviceID, controllerID);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
         process.exit(1);
@@ -105,9 +141,12 @@ async function getControllerDevices(id) {
 
 
 module.exports = {
+    /* controller */
     getAllControllers: getAllControllers,
-    registerController: registerController,
-    getAllDevices: getAllDevices,
-    getDevice: getDevice,
-    getControllerDevices: getControllerDevices
+    registerController: registerController, 
+    updateController: updateController, 
+    changeController: changeController,
+    assignController: assignController
+
+    /* devices */
 }

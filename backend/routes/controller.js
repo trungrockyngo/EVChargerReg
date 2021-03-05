@@ -1,10 +1,9 @@
 'use strict';
 
 var express = require('express');
-var router = express.Router();
-var connector = require('../chaincode-connector/EVChargerConnector')
+const router = express.Router();
+const connector = require('../endpoint/mapping')
 
-/* GET query listing. */
 router.get('/all', async function(req, res, next) {
     const result = await connector.getAllControllers()
     res.json(result); 
@@ -16,9 +15,16 @@ router.post('/register', async function(req, res, next) {
     res.json(result); 
 });
 
-router.get('/devices', async function(req, res, next) {
-    const result = await connector.getControllerDevices(req.body.controllerId);
-    res.json(result); 
+router.post('/update', async (req, res, next) => {
+    const result = await connector.updateController(req.body.controllerID, req.body.serviceProvider, req.body.location.long, req.body.location.lat);
+});
+
+router.post('/change', async (req, res, next) => {
+    const result = await connector.changeController(req.body.deviceID, req.body.newControllerID);
+});
+
+router.post('/assign', async (req, res, next) => {
+    const result = await connector.ass(req.body.controllerID, req.body.serviceProvider, req.body.location.long, req.body.location.lat);
 });
 
 
