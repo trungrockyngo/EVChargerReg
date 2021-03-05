@@ -146,7 +146,9 @@ module.exports = {
     registerController: registerController, 
     updateController: updateController, 
     changeController: changeController,
-    assignController: assignController
-
+    assignController: assignController,
+    getControllerDevices: getControllerDevices,
+    getDevice: getDevice,
+    getAllDevices: getAllDevices
     /* devices */
 }
