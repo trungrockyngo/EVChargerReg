@@ -27,4 +27,5 @@ router.post('/assign', async (req, res, next) => {
     const result = await connector.ass(req.body.controllerID, req.body.serviceProvider, req.body.location.long, req.body.location.lat);
 });
 
+
 module.exports = router;

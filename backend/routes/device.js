@@ -6,7 +6,15 @@ const connector = require('../endpoint/mapping')
 
 /* GET query listing. */
 router.get('/all', async function(req, res, next) {
-    res.json('{"dummy":"test"}');
+    const result = await connector.getAllDevices();
+    res.json(result); 
 });
+
+router.get('/device', async function(req, res, next) {
+    //let queryObj = req.query;
+    const result = await connector.getDevice(req.body.deviceId);
+    res.json(result); 
+});
+
 
 module.exports = router;
