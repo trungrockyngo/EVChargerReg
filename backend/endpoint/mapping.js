@@ -22,6 +22,9 @@ async function init() {
         const network = await gateway.getNetwork('mychannel');
         // Get the contract from the network.
         contract = network.getContract('EVChargerReg');
+
+        console.log('---------------------------- RESULT from backend server --------')
+
         return contract;
     } catch (error) {
         console.error('Failed to initialize transaction:', error);
@@ -165,6 +168,7 @@ async function registerDevice(brand, model, mac, powerType, long, lat) {
 }
 
 async function getDeviceController(devID) {
+    console.log(devID == null ? 'devID ' + devID : "UNDEFINED param"); 
 
     const contract = await init();
     let result;
@@ -175,10 +179,13 @@ async function getDeviceController(devID) {
         console.error('Failed to submit transaction:', error);
     }
     await disconnectGateway(); 
-    console.log('result from chaincode = ' + result.toString());
-    return JSON.parse('{"ControllerID": "' + result.toString() + '"}');
-    //result.toString();
+    // console.log('result from chaincode = ' + result.toString());
 
+    if (result !== null)
+        return JSON.parse('{"ControllerID": "' + result.toString() + '"}');
+    else 
+        //NOTE: meaning controllerID is not existed, default to empty array
+        return [];
 }
 
 async function executeDeviceCommand(devID, command) {

@@ -41,6 +41,4 @@ router.post('/executeCommand', async function(req, res, next) {
     res.json(result); 
 });
 
-
-
 module.exports = router;
