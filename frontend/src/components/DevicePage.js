@@ -9,6 +9,7 @@ export function DevicePage() {
     const defaultURL = 'http://localhost:8000/device/';
 
     const [deviceId, setDeviceId] = useState('');
+    const [controllerId, setControllerId] = useState('');
 
     const getControllerIdHandler = async (ev) => {
         ev.preventDefault();
@@ -17,13 +18,14 @@ export function DevicePage() {
 
             const res = await axios({
                 method: 'get',
-                url: defaultURL + 'controller',
-                data: {
-                    deviceID: 'DEV-1'
+                //url: defaultURL + 'controller',
+                url: 'http://localhost:8000/device/controller',
+                params: {
+                    deviceID: deviceId
                 }
-            })
-
+            });
             console.log('json ' + res.data);
+            setControllerId(res.data.ControllerID);
 
         // } catch (e) {
         //     console.error(e)
@@ -41,7 +43,7 @@ export function DevicePage() {
                 {/* <label htmlFor="Type in deviceID">Get Controller </label> */}
                 <label> Get Controller </label>
                 <button name="submit"> Submit </button>
-
+                <label>Controller ID: {controllerId}</label>
             </form>
         </div>
     );

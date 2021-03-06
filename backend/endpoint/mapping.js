@@ -168,24 +168,18 @@ async function registerDevice(brand, model, mac, powerType, long, lat) {
 }
 
 async function getDeviceController(devID) {
-    console.log(devID == null ? 'devID ' + devID : "UNDEFINED param"); 
-
     const contract = await init();
     let result;
     try {
-        result = await contract.submitTransaction('getDeviceController', devID
-        );   
+        result = await contract.submitTransaction('getDeviceController', devID);   
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        // In case of business error from chaincode (for example: non-existing ID return an empty JSON)
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway(); 
     }
-    await disconnectGateway(); 
-    // console.log('result from chaincode = ' + result.toString());
-
-    if (result !== null)
-        return JSON.parse('{"ControllerID": "' + result.toString() + '"}');
-    else 
-        //NOTE: meaning controllerID is not existed, default to empty array
-        return [];
+    return JSON.parse('{"ControllerID": "' + result.toString() + '"}');
 }
 
 async function executeDeviceCommand(devID, command) {

@@ -27,7 +27,8 @@ router.post('/updateStatus', async function(req, res, next) {
 });
 
 router.get('/controller', async function(req, res, next) {
-    const result = await connector.getDeviceController(req.body.deviceID);
+    // For GET method, change req.body to query instead of body. It is not recommended to have body parameters while using GET method in HTTP.
+    const result = await connector.getDeviceController(req.query.deviceID);
     res.json(result); 
 });
 
