@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+
 .header {
   text-align: center;
 }
@@ -12,4 +13,3 @@
 .custom-btn-toolbar > .btn {
   margin-right: 1rem;
 }
-
