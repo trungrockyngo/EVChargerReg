@@ -12,7 +12,8 @@ router.get('/all', async function(req, res, next) {
 
 router.get('/id', async function(req, res, next) {
     //let queryObj = req.query;
-    const result = await connector.getDevice(req.body.deviceId);
+    console.log('query param deviceId = ' + req.query.deviceId);
+    const result = await connector.getDevice(req.query.deviceId);
     res.json(result); 
 });
 

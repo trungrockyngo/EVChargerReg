@@ -11,8 +11,8 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 import HomePage from './components/HomePage';
 import {DevicePage} from './components/DevicePage';
-import ControllerPage from './components/ControllerPage';
-import SuperAdminPage from './components/SuperAdminPage';
+import {ControllerPage} from './components/ControllerPage';
+import {SuperAdminPage} from './components/SuperAdminPage';
 
 
 function App() {

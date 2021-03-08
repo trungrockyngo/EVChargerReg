@@ -31,7 +31,7 @@ router.post('/assign', async (req, res, next) => {
 });
 
 router.get('/devices', async (req, res, next) => {
-    const result = await connector.getControllerDevices(req.body.id);
+    const result = await connector.getControllerDevices(req.query.id);
     res.json(result); 
 });
 

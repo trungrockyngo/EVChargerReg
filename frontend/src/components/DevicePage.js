@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import Table from 'react-bootstrap/Table';
+import Moment from 'react-moment';
 
 import axios from 'axios';
 
@@ -29,13 +30,23 @@ export function DevicePage() {
     const res = await axios({
       method: 'get',
       //url: defaultURL + 'controller',
-      url: 'http://localhost:8000/device/controller',
+      url: 'http://localhost:8000/device/id',
       params: {
-        deviceID: deviceId,
+        deviceId: deviceId,
       },
     });
     console.log('json ' + res.data);
-    setControllerId(res.data.ControllerID);
+    setControllerId(res.data.controllerID);
+    setMac(res.data.macAddress);
+    setBrand(res.data.brand);
+    setModel(res.data.model);
+    setPowerType(res.data.powerType);
+    res.data.location ? setLong(res.data.location.long) : setLong('');
+    res.data.location ? setLat(res.data.location.lat) : setLat('');
+    setLastSeen(res.data.lastSeen);
+    setLastCommand(res.data.lastExecCommand);
+    res.data.inUse ? setStatus(res.data.inUse + "") : setStatus('');
+    setTemperature(res.data.currentTemp);
 
     // } catch (e) {
     //     console.error(e)
@@ -44,6 +55,17 @@ export function DevicePage() {
 
   return (
     <div>
+      <form onSubmit={getControllerIdHandler}>
+        <InputText
+          value={deviceId}
+          onChange={e => setDeviceId(e.target.value)}
+        />
+        {/* <label htmlFor="Type in deviceID">Get Controller </label> */}
+        <label> Get Controller </label>
+        <button name="submit"> Submit </button>
+        <label>Controller ID: {controllerId}</label>
+      </form>
+
       <section className="section-setting">
         <Table striped bordered hover size="sm">
           <thead >
@@ -86,7 +108,7 @@ export function DevicePage() {
             </tr>
             <tr>
                 <th>Date Last Seen</th>
-                <td> {lastSeen}</td>
+                <td> { lastSeen ? <Moment>{lastSeen}</Moment> : '' } </td>
             </tr>
             <tr>
                 <th>Temperature</th>
@@ -104,17 +126,6 @@ export function DevicePage() {
         </Table>
       </section>
       {/* <label> Current Device </label> */}
-      <form onSubmit={getControllerIdHandler}>
-        <InputText
-          value={deviceId}
-          onChange={e => setDeviceId(e.target.value)}
-        />
-
-        {/* <label htmlFor="Type in deviceID">Get Controller </label> */}
-        <label> Get Controller </label>
-        <button name="submit"> Submit </button>
-        <label>Controller ID: {controllerId}</label>
-      </form>
     </div>
   );
 }

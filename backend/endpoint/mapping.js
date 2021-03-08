@@ -37,9 +37,11 @@ async function getAllControllers() {
     let result;
     try {
         result = await contract.submitTransaction('getAllControllers');
-        await disconnectGateway();    
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
     console.log('result from chaincode = ' + result.toString());
     return JSON.parse(result.toString());
@@ -51,8 +53,10 @@ async function registerController(controllerName, serProvider, long, lat) {
         await contract.submitTransaction('registerController', controllerName, serProvider, long, lat);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway(); 
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -62,8 +66,10 @@ async function updateController(controllerID, serProvider, long, lat) {
         await contract.submitTransaction('updateController', controllerID, serProvider, long, lat);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -73,8 +79,10 @@ async function changeController(deviceID, newControllerID) {
         await contract.submitTransaction('changeController', deviceID, newControllerID);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -84,8 +92,10 @@ async function assignController(deviceID, controllerID) {
         await contract.submitTransaction('assignController', deviceID, controllerID);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -93,15 +103,16 @@ async function disconnectGateway() {
     gateway.disconnect();
 }
 
-
 async function getAllDevices() {
     const contract = await init();
     let result;
     try {
         result = await contract.submitTransaction('getAllDevices');
-        await disconnectGateway();    
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
     console.log('result from chaincode = ' + result.toString());
     return JSON.parse(result.toString());
@@ -112,23 +123,25 @@ async function getDevice(id) {
     let result;
     try {
         result = await contract.submitTransaction('getDevice', id);
-        await disconnectGateway();    
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    console.log('result from chaincode = ' + result.toString());
     return JSON.parse(result.toString());
 }
-
 
 async function getControllerDevices(id) {
     const contract = await init();
     let result;
     try {
         result = await contract.submitTransaction('getControllerDevices', id);
-        await disconnectGateway();    
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
     console.log('result from chaincode = ' + result.toString());
     return JSON.parse(result.toString());
@@ -140,8 +153,10 @@ async function updateDevice(deviceId, currentTemp) {
         await contract.submitTransaction('updateDevice', deviceId, currentTemp);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();  
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -151,8 +166,10 @@ async function updateDeviceStatus(deviceId) {
         await contract.submitTransaction('updateDeviceStatus', deviceId);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -162,8 +179,10 @@ async function registerDevice(brand, model, mac, powerType, long, lat) {
         await contract.submitTransaction('registerDevice', brand, model, mac, powerType, long, lat);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
 
@@ -188,11 +207,12 @@ async function executeDeviceCommand(devID, command) {
         await contract.submitTransaction('executeDeviceCommand', devID, command);
     } catch (error) {
         console.error('Failed to submit transaction:', error);
+        return '{"error": "' + error.message + '"}';
+    } finally {
+        await disconnectGateway();    
     }
-    await disconnectGateway();    
     return JSON.parse('{"result": "success"}');
 }
-
 
 module.exports = {
     /* controller */
