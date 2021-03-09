@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
+import {InputSwitch} from 'primereact/inputswitch';
 import Table from 'react-bootstrap/Table';
 import Moment from 'react-moment';
 
 import axios from 'axios';
 
-//class DevicePage extends React.Component {
 export function DevicePage() {
-  const defaultURL = 'http://localhost:8000/device/';
+  //const defaultURL = 'http://localhost:8000/device/';
 
   const [deviceId, setDeviceId] = useState('');
   const [controllerId, setControllerId] = useState('');
@@ -19,7 +19,7 @@ export function DevicePage() {
   const [lat, setLat] = useState('');
   const [lastSeen, setLastSeen] = useState('');
   const [temp, setTemperature] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(true);
   const [lastCommand, setLastCommand] = useState('');
 
   const getControllerIdHandler = async ev => {
@@ -53,8 +53,39 @@ export function DevicePage() {
     // }
   };
 
+  const setCurrentTempHandler = async (ev) => {
+    ev.preventDefault();
+
+    await axios({
+      method: 'post',
+      
+      url: 'http://localhost:8000/device/update',
+      data: {
+        deviceId: deviceId,
+        currentTemp: temp,
+      },
+    });
+
+  }
+
+  const setInUseStatus = async (e) => {
+
+    setStatus(e.value);
+   
+    await axios({
+      method: 'post',
+      
+      url: 'http://localhost:8000/device/updateStatus',
+      data: {
+        deviceId: deviceId,
+      },
+    });
+
+  }
+
   return (
     <div>
+      <section className="section-setting">
       <form onSubmit={getControllerIdHandler}>
         <InputText
           value={deviceId}
@@ -65,6 +96,7 @@ export function DevicePage() {
         <button name="submit"> Submit </button>
         <label>Controller ID: {controllerId}</label>
       </form>
+      </section>
 
       <section className="section-setting">
         <Table striped bordered hover size="sm">
@@ -126,6 +158,29 @@ export function DevicePage() {
         </Table>
       </section>
       {/* <label> Current Device </label> */}
+
+      <section>
+        <h4>
+          Update Device's Current Temperature
+        </h4>
+      <form onSubmit={setCurrentTempHandler}>
+        <label> Device ID </label>
+        <InputText
+          value={deviceId}
+          onChange={e => setDeviceId(e.target.value)}
+        />
+        <label> Current Temperature </label>
+        <InputText
+          value={temp}
+          onChange={e => setTemperature(e.target.value)}
+        />
+        <button name="submit"> Set Temperature </button>
+      </form>
+      </section>
+      <section>
+        <h4>Set In-Use Status</h4>
+        <InputSwitch checked={status} onChange={setInUseStatus} />
+      </section>
     </div>
   );
 }
