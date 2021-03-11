@@ -89,11 +89,11 @@ export function SuperAdminPage() {
             method: 'get',
             url: 'http://localhost:8000/controller/all'
         });
-        let contRestult = [];
+        let contResult = [];
         resCont.data.map(record => {
-            contRestult.push(record.Record.controllerID);
+            contResult.push(record.Record.controllerID);
         });
-        setControllers(contRestult);
+        setControllers(contResult);
     }
 
     const changeControllerEvent = async (ev, contId, devId) => {
@@ -124,11 +124,11 @@ export function SuperAdminPage() {
             method: 'get',
             url: 'http://localhost:8000/controller/all'
         });
-        let contRestult = [];
+        let contResult = [];
         resCont.data.map(record => {
-            contRestult.push(record.Record.controllerID);
+            contResult.push(record.Record.controllerID);
         });
-        setControllers(contRestult);
+        setControllers(contResult);
     }
 
     return (
