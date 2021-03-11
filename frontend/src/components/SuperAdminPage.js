@@ -61,6 +61,76 @@ export function SuperAdminPage() {
         setControllers(contRestult);
     };
 
+    const assignControllerEvent = async (ev, contId, devId) => {
+        ev.preventDefault();
+        console.log('inside assign, contID= ' + contId + ', devId = ' + devId);
+        setController(contId);
+        const res1 = await axios({
+            method: 'post',
+            url: 'http://localhost:8000/controller/assign',
+            data: {
+                deviceID: devId,
+                controllerID: contId
+            }
+        });
+
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/device/all'
+        });
+
+        let result = [];
+        res.data.map(record => {
+            result.push(record.Record);
+        });
+        setDevices(result);
+
+        const resCont = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/controller/all'
+        });
+        let contRestult = [];
+        resCont.data.map(record => {
+            contRestult.push(record.Record.controllerID);
+        });
+        setControllers(contRestult);
+    }
+
+    const changeControllerEvent = async (ev, contId, devId) => {
+        ev.preventDefault();
+        console.log('inside change, contID= ' + contId + ', devId = ' + devId);
+        setController(contId);
+        const res1 = await axios({
+            method: 'post',
+            url: 'http://localhost:8000/controller/change',
+            data: {
+                deviceID: devId,
+                newControllerID: contId
+            }
+        });
+
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/device/all'
+        });
+
+        let result = [];
+        res.data.map(record => {
+            result.push(record.Record);
+        });
+        setDevices(result);
+
+        const resCont = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/controller/all'
+        });
+        let contRestult = [];
+        resCont.data.map(record => {
+            contRestult.push(record.Record.controllerID);
+        });
+        setControllers(contRestult);
+    }
+
     return (
         <div>
             <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -118,8 +188,8 @@ export function SuperAdminPage() {
                  <tr>
                      <td>{rowData.deviceID}</td>
                      <td>{rowData.controllerID ? rowData.controllerID : 'Not Assigned'}</td>
-                     <td>{rowData.controllerID ? <button>Change</button> : controllers ? <Dropdown className="p-dropdown-items" value={controllers} options={controllers} onChange={(e) => setController(e.value)} placeholder="Select a Controller"/> : '' }</td>
-                     <td>{rowData.controllerID ? controllers ? <Dropdown value={controllers} options={controllers} onChange={(e) => setController(e.value)} placeholder="Select a Controller"/> : '' : <button>Assign</button>}</td>
+                     <td>{rowData.controllerID ? <button>Change</button> : controllers ? <Dropdown value={controller} options={controllers} onChange={(e) => assignControllerEvent(e, e.value, rowData.deviceID)} placeholder="Select a Controller"/> : '' }</td>
+                     <td>{rowData.controllerID ? controllers ? <Dropdown value={controller} options={controllers} onChange={(e) => changeControllerEvent(e, e.value, rowData.deviceID)} placeholder="Select a Controller"/> : '' : <button>Assign</button>}</td>
                  </tr>
 )) : <tr><td></td></tr>}
                         </tbody>
