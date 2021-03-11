@@ -19,10 +19,13 @@ export function DevicePage() {
   const [lat, setLat] = useState('');
   const [lastSeen, setLastSeen] = useState('');
   const [temp, setTemperature] = useState('');
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState('');
   const [lastCommand, setLastCommand] = useState('');
+  const [inputTemp, setInputTemperature] = useState('');
+  const [inputStatus, setInputStatus] = useState(false);
+  
 
-  const getControllerIdHandler = async ev => {
+  const getDeviceInformationIdHandler = async ev => {
     ev.preventDefault();
     // try {
     console.log('deviceId selected ' + deviceId);
@@ -62,7 +65,7 @@ export function DevicePage() {
       url: 'http://localhost:8000/device/update',
       data: {
         deviceId: deviceId,
-        currentTemp: temp,
+        currentTemp: inputTemp,
       },
     });
 
@@ -70,7 +73,7 @@ export function DevicePage() {
 
   const setInUseStatus = async (e) => {
 
-    setStatus(e.value);
+    setInputStatus(e.value);
    
     await axios({
       method: 'post',
@@ -86,15 +89,14 @@ export function DevicePage() {
   return (
     <div>
       <section className="section-setting">
-      <form onSubmit={getControllerIdHandler}>
+      <form onSubmit={getDeviceInformationIdHandler}>
+        {/* <label htmlFor="Type in deviceID">Get Device Details </label> */}
+        <label> Device ID: </label>
         <InputText
           value={deviceId}
           onChange={e => setDeviceId(e.target.value)}
         />
-        {/* <label htmlFor="Type in deviceID">Get Controller </label> */}
-        <label> Get Controller </label>
         <button name="submit"> Submit </button>
-        <label>Controller ID: {controllerId}</label>
       </form>
       </section>
 
@@ -164,22 +166,17 @@ export function DevicePage() {
           Update Device's Current Temperature
         </h4>
       <form onSubmit={setCurrentTempHandler}>
-        <label> Device ID </label>
-        <InputText
-          value={deviceId}
-          onChange={e => setDeviceId(e.target.value)}
-        />
         <label> Current Temperature </label>
         <InputText
-          value={temp}
-          onChange={e => setTemperature(e.target.value)}
+          value={inputTemp}
+          onChange={e => setInputTemperature(e.target.value)}
         />
         <button name="submit"> Set Temperature </button>
       </form>
       </section>
       <section>
         <h4>Set In-Use Status</h4>
-        <InputSwitch checked={status} onChange={setInUseStatus} />
+        <InputSwitch checked={inputStatus} onChange={setInUseStatus} />
       </section>
     </div>
   );
