@@ -22,7 +22,6 @@ function App() {
           <Container className="p-3">
             <Jumbotron>
               <h1 className="header">Electrical Vehicles Charger Station</h1>
-
               <ButtonToolbar className="custom-btn-toolbar">
                 <LinkContainer to="/home">
                   <Button>Home</Button>
@@ -44,7 +43,6 @@ function App() {
                 <Route path="/controller" component={ControllerPage}/>
                 <Route path="/superAdmin" component={SuperAdminPage}/>
               </Switch>
-
 
             </Jumbotron>
           </Container>
