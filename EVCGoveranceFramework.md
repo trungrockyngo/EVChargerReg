@@ -1,13 +1,13 @@
-  ## EVC Governance Framework Documentation 
+  # EVC Governance Framework Documentation 
 
-  ### Overview
+  ## Overview
   The Electric Vehicle Charger (EVC) Platform Governance Framework is the legal foundation for the blockchain-based EVC network - an IoT registry for private sectors.   
 
 Members that constitute the EVC platform are manufacturers/operators of the EV charging systems. The project is open source and allows any organizations of this nature to join.   
 
 The EVC Platform Governance framework supports the system by executing the various agreements relating to the management of or transacting in the system.  
 
-### Motivation  
+## Motivation  
 The governance framework is needed to allow deliberation on the overhead required to operate an open network of EVC devices across certain geographical areas like the Greater Toronto Area (GTA). Some of the deliberations could be on:  
 
 * Agreement on the accuracy and latest information about the controllers and their related devices on the blockchain network  
@@ -45,7 +45,7 @@ It is envisioned that the governing body may be registered as a non-profit entit
 
 * **Governing Board Policy:** This policy centered on governing board's activities executed by consensuses like voting, board term, and the major technical decisions related to operating the network. 
 
-# Rules  
+## Rules  
 * **Ledger Access Rules:**  
 participating parties MUST register as an EVC Owner to participate in the blockchain network.  
 
@@ -58,13 +58,13 @@ Data of each participating party MUST remain private for editing just for the en
    * Every participant MUST be given opportunities to present to the individual in Governing Board.
    * When a formal vote is required, it MUST be conducted using a voting process agreeable to the majority of the group. 
 
-# Agreements
+## Agreements
 * **Participation Membership Agreement:** between members of the Governing Board to agree on decisions by consensus.
 * **Transaction Author Agreement:** between Platform and participating party to initiate a write transaction to the EVC Ledger.
 * **Transaction Endorser Agreement:** between Platform and participating party to request permission for write access to the EVC Ledger.  
 * **Data Processing Agreement:** the agreement between the platform and the participating party establishes the responsibilities of complying with GDPR and other data protection regulations.  
 
-# Membership  
+## Membership  
 
 **The membership process:**    
 * For instructions on how to become a member, show the intention to apply. Please email us at the following address: governingboard@evcharger.com
