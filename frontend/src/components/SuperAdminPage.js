@@ -14,8 +14,9 @@ export function SuperAdminPage() {
     const [lat, setLat] = useState('');
     const [activeIndex, setActiveIndex] = useState(0);
     const [devices, setDevices] = useState('');
-    const [controllers, setControllers] = useState('');
+    const [controllers, setControllers] = useState([]);
     const [controller, setController] = useState('');
+    const [contDropdown, setContDropdown] = useState([]);
 
     const registerControllerHandler = async (ev) => {
         ev.preventDefault();
@@ -36,35 +37,12 @@ export function SuperAdminPage() {
         });
     };
 
-    const getDevicesHandler = async (ev) => {
-        console.log('inside get devices');
-        const res = await axios({
-            method: 'get',
-            url: 'http://localhost:8000/device/all'
-        });
-
-        let result = [];
-        res.data.map(record => {
-            result.push(record.Record);
-        });
-        setDevices(result);
-
-        const resCont = await axios({
-            method: 'get',
-            url: 'http://localhost:8000/controller/all'
-        });
-        let contRestult = [];
-        resCont.data.map(record => {
-            contRestult.push(record.Record.controllerID);
-        });
-        console.log('resCont = ' + JSON.stringify(contRestult));
-        setControllers(contRestult);
-    };
-
-    const assignControllerEvent = async (ev, contId, devId) => {
+    const assignControllerEvent = async (ev, contId, devId, index) => {
         ev.preventDefault();
-        console.log('inside assign, contID= ' + contId + ', devId = ' + devId);
-        setController(contId);
+
+        contDropdown[index] = contId;
+        setContDropdown(contDropdown);        
+
         const res1 = await axios({
             method: 'post',
             url: 'http://localhost:8000/controller/assign',
@@ -96,10 +74,12 @@ export function SuperAdminPage() {
         setControllers(contResult);
     }
 
-    const changeControllerEvent = async (ev, contId, devId) => {
+    const changeControllerEvent = async (ev, contId, devId, index) => {
         ev.preventDefault();
-        console.log('inside change, contID= ' + contId + ', devId = ' + devId);
-        setController(contId);
+
+        contDropdown[index] = contId;
+        setContDropdown(contDropdown);
+
         const res1 = await axios({
             method: 'post',
             url: 'http://localhost:8000/controller/change',
@@ -131,11 +111,36 @@ export function SuperAdminPage() {
         setControllers(contResult);
     }
 
+    const tabChangeHandler = async (ev) => {
+        setActiveIndex(ev.index);
+        console.log('inside get devices');
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/device/all'
+        });
+
+        let result = [];
+        res.data.map(record => {
+            result.push(record.Record);
+        });
+        setDevices(result);
+
+        const resCont = await axios({
+            method: 'get',
+            url: 'http://localhost:8000/controller/all'
+        });
+        let contRestult = [];
+        resCont.data.map(record => {
+            contRestult.push(record.Record.controllerID);
+        });
+        setControllers(contRestult);
+    }
+
     return (
         <div>
-            <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-                <TabPanel header="Register">
-                    <label> Display Controller Info </label>
+            <TabView activeIndex={activeIndex} onTabChange={tabChangeHandler}>
+                <TabPanel header="Register Controller">
+                    <label> Fill new Controller Info: </label>
                     <form onSubmit={registerControllerHandler}>
                         <table>
                             <tbody>
@@ -172,24 +177,31 @@ export function SuperAdminPage() {
                         </table>
                     </form>
                 </TabPanel>
-                <TabPanel header="Display">
-                    <button name="display" onClick={(e) => getDevicesHandler(e.target.value)}>Display</button>
+                <TabPanel header="Assign/Change Controller">
                     <table>
                         <thead>
                         <tr>
                     <th>Device ID</th>
                      <th>Controller ID</th>
-                     <th></th>
-                     <th></th>
+                     <th>Action</th>
+                     <th>New Controller ID</th>
                 </tr>
                         </thead>
                         <tbody>
 {devices ? devices.map((rowData, index) => (
-                 <tr>
+                 <tr key={index}>
                      <td>{rowData.deviceID}</td>
                      <td>{rowData.controllerID ? rowData.controllerID : 'Not Assigned'}</td>
-                     <td>{rowData.controllerID ? <button>Change</button> : controllers ? <Dropdown value={controller} options={controllers} onChange={(e) => assignControllerEvent(e, e.value, rowData.deviceID)} placeholder="Select a Controller"/> : '' }</td>
-                     <td>{rowData.controllerID ? controllers ? <Dropdown value={controller} options={controllers} onChange={(e) => changeControllerEvent(e, e.value, rowData.deviceID)} placeholder="Select a Controller"/> : '' : <button>Assign</button>}</td>
+                     <td>
+                         {rowData.controllerID ? <label>Change</label> : <label>Assign</label>}
+                     </td>
+                     <td>
+                        {rowData.controllerID ? 
+                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => changeControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller"/> 
+                            :
+                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => assignControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller"/>
+                        }
+                     </td>
                  </tr>
 )) : <tr><td></td></tr>}
                         </tbody>
