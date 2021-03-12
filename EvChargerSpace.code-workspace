@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "chaincode"
+		},
+		{
+			"path": "backend"
+		},
+		{
+			"path": "frontend"
+		}
+	],
+	"settings": {}
+}
