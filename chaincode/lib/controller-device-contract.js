@@ -1,3 +1,4 @@
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -18,11 +19,11 @@ class ControllerDeviceContract extends Contract {
         console.info('============= START : Initialize Ledger ===========');
 
         
-        const controller = {};
-        const device = {};
+        // const controller = {};
+        // const device = {};
 
-        await ctx.stub.putState(0, Buffer.from(JSON.stringify(controller)));
-        await ctx.stub.putState(0, Buffer.from(JSON.stringify(device)));
+        // await ctx.stub.putState(0, Buffer.from(JSON.stringify(controller)));
+        // await ctx.stub.putState(0, Buffer.from(JSON.stringify(device)));
 
         console.info('============= END : Initialize Ledger ===========');
     }
