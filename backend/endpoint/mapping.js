@@ -188,6 +188,8 @@ async function registerDevice(brand, model, mac, powerType, long, lat) {
 
 async function getDeviceController(devID) {
     const contract = await init();
+    console.log(`---------- IN BACKEND - MAPPPING getDeviceController(devID=${req.query.id}) --------`)
+
     let result;
     try {
         result = await contract.submitTransaction('getDeviceController', devID);   

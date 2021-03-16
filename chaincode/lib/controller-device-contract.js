@@ -1,3 +1,4 @@
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -16,6 +17,7 @@ class ControllerDeviceContract extends Contract {
     */
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
+
 
 
         console.info('============= END : Initialize Ledger ===========');

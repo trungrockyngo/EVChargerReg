@@ -1,4 +1,11 @@
 import './App.css';
+
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.css';
+
+// import 'primeicons/primeicons.css';
+// import 'primeflex/primeflex.css';
+
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 
 import Jumbotron from 'react-bootstrap/Jumbotron';

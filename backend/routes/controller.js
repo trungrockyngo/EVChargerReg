@@ -31,6 +31,8 @@ router.post('/assign', async (req, res, next) => {
 });
 
 router.get('/devices', async (req, res, next) => {
+    console.log(`---------- BEFORE CONNECTING TO BACKEND: req.query.id = ${req.query.id} --------`)
+    
     const result = await connector.getControllerDevices(req.query.id);
     res.json(result); 
 });

@@ -3,8 +3,8 @@ import { InputText } from 'primereact/inputtext';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Dropdown } from 'primereact/dropdown';
 import axios from 'axios';
-import 'primereact/resources/themes/saga-blue/theme.css';
-import 'primereact/resources/primereact.css';
+// import 'primereact/resources/themes/saga-blue/theme.css';
+// import 'primereact/resources/primereact.css';
 
 export function SuperAdminPage() {
 
@@ -41,7 +41,7 @@ export function SuperAdminPage() {
         ev.preventDefault();
 
         contDropdown[index] = contId;
-        setContDropdown(contDropdown);        
+        setContDropdown(contDropdown);
 
         const res1 = await axios({
             method: 'post',
@@ -180,30 +180,30 @@ export function SuperAdminPage() {
                 <TabPanel header="Assign/Change Controller">
                     <table>
                         <thead>
-                        <tr>
-                    <th>Device ID</th>
-                     <th>Controller ID</th>
-                     <th>Action</th>
-                     <th>New Controller ID</th>
-                </tr>
+                            <tr>
+                                <th>Device ID</th>
+                                <th>Controller ID</th>
+                                <th>Action</th>
+                                <th>New Controller ID</th>
+                            </tr>
                         </thead>
                         <tbody>
-{devices ? devices.map((rowData, index) => (
-                 <tr key={index}>
-                     <td>{rowData.deviceID}</td>
-                     <td>{rowData.controllerID ? rowData.controllerID : 'Not Assigned'}</td>
-                     <td>
-                         {rowData.controllerID ? <label>Change</label> : <label>Assign</label>}
-                     </td>
-                     <td>
-                        {rowData.controllerID ? 
-                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => changeControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller"/> 
-                            :
-                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => assignControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller"/>
-                        }
-                     </td>
-                 </tr>
-)) : <tr><td></td></tr>}
+                            {devices ? devices.map((rowData, index) => (
+                                <tr key={index}>
+                                    <td>{rowData.deviceID}</td>
+                                    <td>{rowData.controllerID ? rowData.controllerID : 'Not Assigned'}</td>
+                                    <td>
+                                        {rowData.controllerID ? <label>Change</label> : <label>Assign</label>}
+                                    </td>
+                                    <td>
+                                        {rowData.controllerID ?
+                                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => changeControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller" />
+                                            :
+                                            <Dropdown value={contDropdown[index]} options={controllers} onChange={(e) => assignControllerEvent(e, e.value, rowData.deviceID, index)} placeholder="Select a Controller" />
+                                        }
+                                    </td>
+                                </tr>
+                            )) : <tr><td></td></tr>}
                         </tbody>
                     </table>
                 </TabPanel>
