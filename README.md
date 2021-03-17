@@ -39,7 +39,7 @@ growing Electric Vehicle Owners.
     <li> <strong> Users: </strong>   Electric Vehicle Owners. </li>
     <li> <strong> Development Team </strong>  </li>
 </ul>
-<hr>
+
 
 <h2> Team </h2>
 
@@ -85,7 +85,7 @@ growing Electric Vehicle Owners.
     <li> Get Device </li>
     <li> Get All Devices </li> 
 </ul>
-<hr>
+<br>
 
 <h2> Transition Functions Details </h2>
 
@@ -99,7 +99,9 @@ growing Electric Vehicle Owners.
 | Execute Device Command  	| Device ID <br>Command                                                	| Result <br>  	| Controller Adminstrator           	| Sends a command for execution on a device.   	|
 | Update Device           	| Device ID <br>Current Temperature                                    	| None         	| Device                            	| Update device information                    	|
 | Update Device Status    	| Device ID <br>In Use                                                 	| None         	| Device                            	| Update if the device is in use.              	|
-<br><hr>
+<br>
+
+---
 
 <h2> Other Functions Details </h2>
 
@@ -111,7 +113,8 @@ growing Electric Vehicle Owners.
 | Get Controller Devices  	| Controller ID <br>  	| Array of Controller Devices                  	| Controller <br>Super System  	| Returns list of devices of a particular controller.     	|
 | Get Device              	| Device ID <br>      	| Brand <br>Model <br>Power Type <br>Location  	| User                         	| Return device information to a user.                    	|
 | Get All Devices         	| None                	| Array of Device ID                           	| Super System                 	| Returns a list of all devices.                          	|
-<br><hr>
+<br>
+---
 
 <h2> State data descriptions </h2>
 <h3> Controller </h3>
@@ -172,8 +175,8 @@ growing Electric Vehicle Owners.
 | Last Command       	| String        	| Command text                          	|
 | Last Command Date  	| Date/Time     	|                                       	|
 | Controller ID      	| Number        	| 123                                   	|
-<br><hr>
-
+<br>
+---
 <h2> Role Descriptions </h2>
 <ul>
     <li> Controller </li>
@@ -188,17 +191,17 @@ growing Electric Vehicle Owners.
 | Device        	| An EV Charger Device.                                     	| Read access to device data.                                  	|
 | Super System  	| Main terminal that carries out administrative functions.  	| Read and write access to controllers.                        	|
 | User          	| EV Charger user                                           	| Read access to a device.                                     	|
-<br><hr>
-
+<br>
+---
 <h2> Blockchain Architectural Diagrams </h2>
 
-![alt text](images/IOTRegStateDiagram.png?raw=true) <br>
+![alt text](documentation/IOTRegStateDiagram.png?raw=true) <br>
 
-![alt text](images/EVCharger-HLF.png?raw=true) <br>
+![alt text](documentation/EVCharger-HLF.png?raw=true) <br>
 
-![alt text](images/BlockchainArchitecture.png?raw=true) <br>
+![alt text](documentation/BlockchainArchitecture.png?raw=true) <br>
 
-
+---
 <h2> BACKEND – RESTful API endpoints </h2>
 
 | Endpoint     	| Path            	| HTTP method 	| Query input                                                                   	| Output                        	|
@@ -216,4 +219,4 @@ growing Electric Vehicle Owners.
 |              	| /controller     	| GET         	| deviceId                                                                      	| Object - Controller Id        	|
 |              	| /register       	| POST        	| brand, <br>model, <br>mac, <br>powerType,<br>location.long, <br>location.lat  	| success/fail                  	|
 |              	| /executeCommand 	| POST        	| deviceId, <br>command                                                         	| success/fail                  	|
-<br><hr>
+<br>
