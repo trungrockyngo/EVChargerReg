@@ -9,7 +9,6 @@ import 'primereact/resources/primereact.css';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 
 import Jumbotron from 'react-bootstrap/Jumbotron';
-// import NavBar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';

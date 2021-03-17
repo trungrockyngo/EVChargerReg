@@ -20,13 +20,13 @@ export function ControllerPage() {
     const [controllerId, setControllerId] = useState('');
 
     const [devices, setDevices] = useState([]);
-    const [command, setCommand] = useState('Please enter command');
-
+    const [command, setCommand] = useState( `"Please enter"`);
     const [activeIndex, setActiveIndex] = useState(0);
-    
+
     // const [controllerInfo, setControllerInfo] = useState([]);
 
-    const defaultURL = `http://${serverIP}:8000/controller`;
+    const defaultURL = `http://${serverIP}:8000/`;
+
     const getControllerDevicesHandler = async (ev) => {
         ev.preventDefault();
         console.log(`device id is ${controllerId}`);
@@ -42,9 +42,12 @@ export function ControllerPage() {
 
         const fetchedRes = await axios({
             method: 'get',
-            url: `${defaultURL}/devices?id=${controllerId}`
+            url: `${defaultURL}/controller/devices?id=${controllerId}`
         });
         // console.log(`fetchedRes: ${fetchedRes.data}`);
+        let res = [];
+        fetchedRes.data.map(each => res.push(each.Record));
+        setDevices(res);
     };
 
     const registerDeviceHandler = async (ev) => {
@@ -52,7 +55,7 @@ export function ControllerPage() {
 
         const res = await axios({
             method: 'post',
-            url: 'http://' + serverIP + ':8000/device/register',
+            url: `${defaultURL}/device/register`,
             data: {
                 brand: brand,
                 model: model,
@@ -69,12 +72,12 @@ export function ControllerPage() {
         console.log(`----inside commandInDeviceHandler: lastExecCommand: ${data.lastExecCommand} -----`);
         return (
             <form onSubmit={(ev) => updateCommandHandler(ev, data)}>
-                {data.lastExecCommand ?
-                    <label> data.lastExecCommand</label>
-                    : 
-                    <InputText value={command}
-                        onChange={ev => setCommand(ev.target.value)} />}
-                <button> Change command</button>
+     
+                    <div>
+                        <InputText value={command}
+                            onChange={ev => setCommand(ev.target.value)} />
+                        <button> Change Command</button>
+                    </div>
             </form>
         );
     }
@@ -88,11 +91,11 @@ export function ControllerPage() {
 
         const res = await axios({
             method: 'post',
-            url: 'http://localhost:8000/device/executeCommand',
+            url: `${defaultURL}/device/executeCommand`,
             data: {
                 deviceID: data.deviceID,
                 command: command
-             }
+            }
         });
     }
 
@@ -130,7 +133,7 @@ export function ControllerPage() {
                 </TabPanel>
                 <TabPanel header="Register Device">
                     <form onSubmit={registerDeviceHandler}>
-                    <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm">
                             <tbody>
                                 <tr>
                                     <td>
