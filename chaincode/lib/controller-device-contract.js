@@ -1,3 +1,4 @@
+
 /*
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -17,23 +18,40 @@ class ControllerDeviceContract extends Contract {
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
 
-        
-        const controller = {};
-        const device = {};
 
-        await ctx.stub.putState(0, Buffer.from(JSON.stringify(controller)));
-        await ctx.stub.putState(0, Buffer.from(JSON.stringify(device)));
 
         console.info('============= END : Initialize Ledger ===========');
     }
 
+    async getAllControllers(ctx) {
+        console.info('============= START : Get All Controllers ===========');
+
+        let queryString = {
+            "selector": {
+                "docType":"controller"
+            }
+        };
+
+        const allResults = [];
+
+        for await (const {key, value} of ctx.stub.getQueryResult(JSON.stringify(queryString))) {
+            const strValue = Buffer.from(value).toString('utf8');
+            let record;
+            try {
+                record = JSON.parse(strValue);
+            } catch (err) {
+                console.log(err);
+                record = strValue;
+            }
+            allResults.push({ Key: key, Record: record });
+        }
+        console.info(allResults);
+        console.info('============= END : Get All Controllers ===========');
+        return JSON.stringify(allResults);
+    }
+
     async registerController(ctx, controllerName, serviceProvider, long, lat) {
         console.info('============= START : Register Controller ===========');
-
-        /*
-        FIX: Controller ID can be converted to auto-increment internally
-             docType: 'controller' (Review the need for docType attribute)
-        */
 
         this.controllerID++;
         const recControllerID = "CONTR-" + this.controllerID;
@@ -71,32 +89,6 @@ class ControllerDeviceContract extends Contract {
         console.info('============= END : Update Controller ===========');
     }
 
-    async registerDevice(ctx, brand, model, MAC, powerType, long, lat) {
-        console.info('============= START : Register Device ===========');
-
-        this.deviceID++;
-        const recDeviceID = "DEV-" + this.deviceID;
-        console.log("this.deviceID = " + this.deviceID);
-
-        const device = {
-            deviceID: recDeviceID,
-            docType: "device",
-            brand: brand,
-            model: model,
-            macAddress: MAC,
-            powerType: powerType,
-            inUse: false,
-            location: { 
-                long: long,
-                lat: lat
-            }
-        };
-
-        await ctx.stub.putState(recDeviceID, Buffer.from(JSON.stringify(device)));
-
-        console.info('============= END : Register Device ===========');
-    }
-
     async assignController(ctx, deviceID, controllerID) {
         console.info('============= START : Assign Controller ===========');
 
@@ -127,6 +119,32 @@ class ControllerDeviceContract extends Contract {
         await ctx.stub.putState(deviceID, Buffer.from(JSON.stringify(device)));
 
         console.info('============= END : Change Controller ===========');
+    }
+
+    async registerDevice(ctx, brand, model, MAC, powerType, long, lat) {
+        console.info('============= START : Register Device ===========');
+
+        this.deviceID++;
+        const recDeviceID = "DEV-" + this.deviceID;
+        console.log("this.deviceID = " + this.deviceID);
+
+        const device = {
+            deviceID: recDeviceID,
+            docType: "device",
+            brand: brand,
+            model: model,
+            macAddress: MAC,
+            powerType: powerType,
+            inUse: false,
+            location: { 
+                long: long,
+                lat: lat
+            }
+        };
+
+        await ctx.stub.putState(recDeviceID, Buffer.from(JSON.stringify(device)));
+
+        console.info('============= END : Register Device ===========');
     }
 
     async getDeviceController(ctx, deviceID) {
@@ -235,33 +253,6 @@ class ControllerDeviceContract extends Contract {
         }
         console.info(allResults);
         console.info('============= END : Get All Devices ===========');
-        return JSON.stringify(allResults);
-    }
-
-    async getAllControllers(ctx) {
-        console.info('============= START : Get All Controllers ===========');
-
-        let queryString = {
-            "selector": {
-                "docType":"controller"
-            }
-        };
-
-        const allResults = [];
-
-        for await (const {key, value} of ctx.stub.getQueryResult(JSON.stringify(queryString))) {
-            const strValue = Buffer.from(value).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
-            allResults.push({ Key: key, Record: record });
-        }
-        console.info(allResults);
-        console.info('============= END : Get All Controllers ===========');
         return JSON.stringify(allResults);
     }
 

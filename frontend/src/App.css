@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+}
+
+.custom-btn-toolbar {
+  display: inline !important;
+}
+
+.custom-btn-toolbar > .btn {
+  margin-right: 1rem;
+}
+
+.section-setting {
+  margin: 2rem;
+
+}
+
+.tr-heading{
+  text-align: center;
+}

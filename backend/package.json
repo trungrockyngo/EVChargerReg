@@ -1,5 +1,5 @@
 {
-  "name": "evchargerreg",
+  "name": "evchargerreg-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "fabric-network": "^2.2.5",
