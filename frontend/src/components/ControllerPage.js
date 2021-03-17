@@ -5,6 +5,7 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import Table from 'react-bootstrap/Table';
+import {serverIP} from '../config';
 
 import axios from 'axios';
 
@@ -25,7 +26,7 @@ export function ControllerPage() {
     
     // const [controllerInfo, setControllerInfo] = useState([]);
 
-    const defaultURL = `http://localhost:8000/controller`;
+    const defaultURL = `http://${serverIP}:8000/controller`;
     const getControllerDevicesHandler = async (ev) => {
         ev.preventDefault();
         console.log(`device id is ${controllerId}`);
@@ -51,7 +52,7 @@ export function ControllerPage() {
 
         const res = await axios({
             method: 'post',
-            url: 'http://localhost:8000/device/register',
+            url: 'http://' + serverIP + ':8000/device/register',
             data: {
                 brand: brand,
                 model: model,

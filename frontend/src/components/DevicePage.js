@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import { InputSwitch } from 'primereact/inputswitch';
+import {InputSwitch} from 'primereact/inputswitch';
 import Table from 'react-bootstrap/Table';
 import Moment from 'react-moment';
+import {serverIP} from '../config';
 
 import axios from 'axios';
 
 export function DevicePage() {
-  const defaultURL = 'http://localhost:8000/device/';
+  //const defaultURL = 'http://localhost:8000/device/';
 
   const [deviceId, setDeviceId] = useState('');
   const [controllerId, setControllerId] = useState('');
@@ -23,7 +24,7 @@ export function DevicePage() {
   const [lastCommand, setLastCommand] = useState('');
   const [inputTemp, setInputTemperature] = useState('');
   const [inputStatus, setInputStatus] = useState(false);
-
+  
 
   const getDeviceInformationIdHandler = async ev => {
     ev.preventDefault();
@@ -32,7 +33,8 @@ export function DevicePage() {
 
     const res = await axios({
       method: 'get',
-      url: 'http://localhost:8000/device/id',
+      //url: defaultURL + 'controller',
+      url: 'http://' + serverIP +  ':8000/device/id',
       params: {
         deviceId: deviceId,
       },
@@ -60,7 +62,7 @@ export function DevicePage() {
 
     await axios({
       method: 'post',
-
+      
       url: 'http://localhost:8000/device/update',
       data: {
         deviceId: deviceId,
@@ -73,10 +75,10 @@ export function DevicePage() {
   const setInUseStatus = async (e) => {
 
     setInputStatus(e.value);
-
+   
     await axios({
       method: 'post',
-
+      
       url: 'http://localhost:8000/device/updateStatus',
       data: {
         deviceId: deviceId,
@@ -88,72 +90,72 @@ export function DevicePage() {
   return (
     <div>
       <section className="section-setting">
-        <form onSubmit={getDeviceInformationIdHandler}>
-          {/* <label htmlFor="Type in deviceID">Get Device Details </label> */}
-          <label> Device ID: </label>
-          <InputText
-            value={deviceId}
-            onChange={e => setDeviceId(e.target.value)}
-          />
-          <button name="submit"> Submit </button>
-        </form>
+      <form onSubmit={getDeviceInformationIdHandler}>
+        {/* <label htmlFor="Type in deviceID">Get Device Details </label> */}
+        <label> Device ID: </label>
+        <InputText
+          value={deviceId}
+          onChange={e => setDeviceId(e.target.value)}
+        />
+        <button name="submit"> Submit </button>
+      </form>
       </section>
 
       <section className="section-setting">
         <Table striped bordered hover size="sm">
           <thead >
-            <tr className="tr-heading">
+            <tr className ="tr-heading">
               <th colSpan="2">Device Information </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>Device ID</th>
-              <td> {deviceId}</td>
+                <th>Device ID</th>
+                <td> {deviceId}</td>
             </tr>
             <tr>
-              <th>Brand</th>
-              <td> {brand} </td>
+                <th>Brand</th>
+                <td> {brand} </td>
             </tr>
             <tr>
-              <th>Model</th>
-              <td> {model} </td>
+                <th>Model</th>
+                <td> {model} </td>
             </tr>
             <tr>
-              <th>MAC Address</th>
-              <td> {mac} </td>
+                <th>MAC Address</th>
+                <td> {mac} </td>
             </tr>
             <tr>
-              <th>Power Type</th>
-              <td> {powerType} </td>
+                <th>Power Type</th>
+                <td> {powerType} </td>
             </tr>
             <tr>
-              <th>Controller ID</th>
-              <td> {controllerId} </td>
+                <th>Controller ID</th>
+                <td> {controllerId} </td>
             </tr>
             <tr>
-              <th>Location - Longitude</th>
-              <td>{long} </td>
+                <th>Location - Longitude</th>
+                <td>{long} </td>
             </tr>
             <tr>
-              <th>Location - Latitude </th>
-              <td> {lat}</td>
+                <th>Location - Latitude </th>
+                <td> {lat}</td>
             </tr>
             <tr>
-              <th>Date Last Seen</th>
-              <td> {lastSeen ? <Moment>{lastSeen}</Moment> : ''} </td>
+                <th>Date Last Seen</th>
+                <td> { lastSeen ? <Moment>{lastSeen}</Moment> : '' } </td>
             </tr>
             <tr>
-              <th>Temperature</th>
-              <td> {temp}</td>
+                <th>Temperature</th>
+                <td> {temp}</td>
             </tr>
             <tr>
-              <th>In-Use Status</th>
-              <td> {status}</td>
+                <th>In-Use Status</th>
+                <td> {status}</td>
             </tr>
             <tr>
-              <th>Last Executed Command</th>
-              <td> {lastCommand}</td>
+                <th>Last Executed Command</th>
+                <td> {lastCommand}</td>
             </tr>
           </tbody>
         </Table>
@@ -164,14 +166,14 @@ export function DevicePage() {
         <h4>
           Update Device's Current Temperature
         </h4>
-        <form onSubmit={setCurrentTempHandler}>
-          <label> Current Temperature </label>
-          <InputText
-            value={inputTemp}
-            onChange={e => setInputTemperature(e.target.value)}
-          />
-          <button name="submit"> Set Temperature </button>
-        </form>
+      <form onSubmit={setCurrentTempHandler}>
+        <label> Current Temperature </label>
+        <InputText
+          value={inputTemp}
+          onChange={e => setInputTemperature(e.target.value)}
+        />
+        <button name="submit"> Set Temperature </button>
+      </form>
       </section>
       <section>
         <h4>Set In-Use Status</h4>

@@ -3,6 +3,7 @@ import { InputText } from 'primereact/inputtext';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Dropdown } from 'primereact/dropdown';
 import axios from 'axios';
+import {serverIP} from '../config';
 // import 'primereact/resources/themes/saga-blue/theme.css';
 // import 'primereact/resources/primereact.css';
 
@@ -25,7 +26,7 @@ export function SuperAdminPage() {
         const res = await axios({
             method: 'post',
             //url: defaultURL + 'controller',
-            url: 'http://localhost:8000/controller/register',
+            url: 'http://' + serverIP + ':8000/controller/register',
             data: {
                 controllerName: controllerName,
                 serviceProvider: serviceProvider,
@@ -45,7 +46,7 @@ export function SuperAdminPage() {
 
         const res1 = await axios({
             method: 'post',
-            url: 'http://localhost:8000/controller/assign',
+            url: 'http://' + serverIP + ':8000/controller/assign',
             data: {
                 deviceID: devId,
                 controllerID: contId
@@ -54,7 +55,7 @@ export function SuperAdminPage() {
 
         const res = await axios({
             method: 'get',
-            url: 'http://localhost:8000/device/all'
+            url: 'http://' + serverIP + ':8000/device/all'
         });
 
         let result = [];
@@ -65,7 +66,7 @@ export function SuperAdminPage() {
 
         const resCont = await axios({
             method: 'get',
-            url: 'http://localhost:8000/controller/all'
+            url: 'http://' + serverIP + ':8000/controller/all'
         });
         let contResult = [];
         resCont.data.map(record => {
@@ -82,7 +83,7 @@ export function SuperAdminPage() {
 
         const res1 = await axios({
             method: 'post',
-            url: 'http://localhost:8000/controller/change',
+            url: 'http://' + serverIP + ':8000/controller/change',
             data: {
                 deviceID: devId,
                 newControllerID: contId
@@ -91,7 +92,7 @@ export function SuperAdminPage() {
 
         const res = await axios({
             method: 'get',
-            url: 'http://localhost:8000/device/all'
+            url: 'http://' + serverIP + ':8000/device/all'
         });
 
         let result = [];
@@ -102,7 +103,7 @@ export function SuperAdminPage() {
 
         const resCont = await axios({
             method: 'get',
-            url: 'http://localhost:8000/controller/all'
+            url: 'http://' + serverIP + ':8000/controller/all'
         });
         let contResult = [];
         resCont.data.map(record => {
@@ -116,7 +117,7 @@ export function SuperAdminPage() {
         console.log('inside get devices');
         const res = await axios({
             method: 'get',
-            url: 'http://localhost:8000/device/all'
+            url: 'http://' + serverIP + ':8000/device/all'
         });
 
         let result = [];
@@ -127,7 +128,7 @@ export function SuperAdminPage() {
 
         const resCont = await axios({
             method: 'get',
-            url: 'http://localhost:8000/controller/all'
+            url: 'http://' + serverIP + ':8000/controller/all'
         });
         let contRestult = [];
         resCont.data.map(record => {
