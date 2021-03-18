@@ -1,10 +1,12 @@
 # Electric Vehicle Charger Registry
 
 <h2> Project Description </h2>
-A blockchain registry for  Electric Vehicle Charging Stations. The system will track, manage and enable accurate and reliable 
-data sharing on an open platform where operators provide stations to serve owners of electric vehicles and all 
+A blockchain registry for  Electric Vehicle Charging Stations. The system will track, manage and enable accurate and 
+reliable data sharing on an open platform where operators provide stations to serve owners of electric vehicles and all 
 the participants are protected from unfair practises. To learn more about the governance of this project, click here: 
-[Governance Framework](https://github.com/trungrockyngo/EVChargerReg/blob/main/documentation/EVCGoveranceFramework.md)
+
+[Governance Framework](documentation/EVCGoveranceFramework.md)
+
 <hr>
 <h2> Network participants </h2>
 <ol>
