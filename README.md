@@ -2,7 +2,10 @@
 
 <h2> Project Description </h2>
 A blockchain registry for  Electric Vehicle Charging Stations. The system will track, manage and enable accurate and reliable 
-data sharing on an open platform where operators provide stations to serve owners of electric vehicles and all the participants are protected from unfair practises.
+data sharing on an open platform where operators provide stations to serve owners of electric vehicles and all 
+the participants are protected from unfair practises. To learn more about the governance of this project, click here: 
+[Governance Framework](documentation/EVCGoveranceFramework.md)
+
 <hr>
 <h2> Network participants </h2>
 <ol>
@@ -195,11 +198,11 @@ growing Electric Vehicle Owners.
 ---
 <h2> Blockchain Architectural Diagrams </h2>
 
-![alt text](documentation/IOTRegStateDiagram.png?raw=true) <br>
+![State Diagram](documentation/IOTRegStateDiagram.png?raw=true) <br>
 
-![alt text](documentation/EVCharger-HLF.png?raw=true) <br>
+![HLF Diagram](documentation/EVCharger-HLF.png?raw=true) <br>
 
-![alt text](documentation/BlockchainArchitecture.png?raw=true) <br>
+![Blockchain Architetcture](documentation/BlockchainArchitecture.png?raw=true) <br>
 
 ---
 <h2> BACKEND – RESTful API endpoints </h2>
